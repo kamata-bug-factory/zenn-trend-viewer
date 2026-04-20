@@ -1,10 +1,43 @@
-export const App = () => {
+import { useEffect, useState } from "react";
+import type { Category } from "@/types/article";
+import { useArticles } from "@/hooks/useArticles";
+import { Header } from "./components/Header";
+import { ArticleList } from "./components/ArticleList";
+
+export function App() {
+  const [category, setCategory] = useState<Category>("tech");
+  const {
+    articles,
+    loading,
+    error,
+    cachedAt,
+    fetch: fetchArticles,
+    refetch,
+  } = useArticles();
+
+  useEffect(() => {
+    fetchArticles(category);
+  }, [category, fetchArticles]);
+
+  const handleRefresh = () => refetch(category);
+
   return (
-    <div className="w-[400px] p-4">
-      <h1 className="text-lg font-semibold">Zenn Trend Viewer</h1>
-      <p className="text-muted-foreground mt-2 text-sm">
-        環境構築済みのプレースホルダーです。実装は docs/SPEC.md を参照。
-      </p>
+    <div className="flex min-h-[500px] w-[400px] flex-col">
+      <Header
+        category={category}
+        onCategoryChange={setCategory}
+        onRefresh={handleRefresh}
+        cachedAt={cachedAt}
+        refreshing={loading}
+      />
+      <div className="flex-1 overflow-y-auto">
+        <ArticleList
+          articles={articles}
+          loading={loading}
+          error={error}
+          onRefresh={handleRefresh}
+        />
+      </div>
     </div>
   );
-};
+}
