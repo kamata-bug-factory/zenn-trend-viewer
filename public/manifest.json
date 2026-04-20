@@ -1,0 +1,22 @@
+{
+  "manifest_version": 3,
+  "name": "Zenn Trend Viewer",
+  "version": "1.0.0",
+  "description": "Zennのトレンド記事をブラウザのツールバーから確認できるChrome拡張機能",
+  "permissions": ["storage"],
+  "host_permissions": ["https://zenn.dev/*"],
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "action": {
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    },
+    "default_popup": "src/popup/index.html",
+    "default_title": "Zenn Trend Viewer"
+  }
+}
