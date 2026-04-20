@@ -3,6 +3,8 @@
 Zennのトレンド記事をブラウザのツールバーから確認できるChrome拡張。
 ヘッダーのトグルで Tech / Idea を切り替えて表示できます。
 
+![Zenn Trend Viewer](docs/images/screenshot.png)
+
 ## インストール
 
 1. [Releases ページ](https://github.com/kamata-bug-factory/zenn-trend-viewer/releases/latest) から最新の `zenn-trend-viewer-vX.X.X.zip` をダウンロード
