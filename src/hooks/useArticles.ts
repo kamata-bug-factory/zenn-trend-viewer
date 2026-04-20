@@ -1,7 +1,7 @@
 import { useCallback, useState } from "react";
 import type { ArticleDetail, Category } from "@/types/article";
 import {
-  clearCachedArticles,
+  clearAllCachedArticles,
   getCachedArticles,
   setCachedArticles,
 } from "@/storage/cache";
@@ -59,7 +59,7 @@ export function useArticles(): UseArticlesResult {
     setError(null);
 
     try {
-      await clearCachedArticles(category);
+      await clearAllCachedArticles();
       const details = await fetchFromNetwork(category);
       setArticles(details);
       setCachedAt(Date.now());

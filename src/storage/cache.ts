@@ -38,6 +38,6 @@ export async function setCachedArticles(
   await chrome.storage.local.set({ [cacheKey(category)]: cached });
 }
 
-export async function clearCachedArticles(category: Category): Promise<void> {
-  await chrome.storage.local.remove(cacheKey(category));
+export async function clearAllCachedArticles(): Promise<void> {
+  await chrome.storage.local.remove([cacheKey("tech"), cacheKey("idea")]);
 }
