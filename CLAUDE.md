@@ -26,7 +26,7 @@ src/
 ├── lib/             # ユーティリティ
 ├── hooks/           # カスタムフック（useArticles など）
 ├── services/        # 外部通信・データ取得ロジック
-│   └── api.ts       # Zenn API クライアント（Tech / Idea）
+│   └── api.ts       # Zenn API クライアント（一覧 + 詳細）
 ├── storage/         # chrome.storage のラッパー
 │   └── cache.ts     # 記事キャッシュ管理（Tech / Idea を別キーで保持）
 └── types/           # 型定義
@@ -64,6 +64,7 @@ npm run typecheck    # 型チェック
 ## アーキテクチャ上の判断
 
 - **表示件数10件制限:** Zenn API のレスポンスから上位10件のみ表示。[qiita-trend-viewer](https://github.com/kamata-bug-factory/qiita-trend-viewer) と件数を揃える方針
-- **認証不要:** Zenn API はトークン不要で記事一覧・タグ・LGTM数まで1回のリクエストで取得できるため、トークン登録フォームは持たない
+- **認証不要:** Zenn API はトークン不要で呼び出せるため、トークン登録フォームは持たない
+- **2段階のAPI呼び出し:** 一覧エンドポイントのレスポンスには `topics`（タグ）が含まれないため、タグ表示のために記事ごとに詳細エンドポイント（`https://zenn.dev/api/articles/:slug`）を呼び出す。上位10件に絞り `Promise.all` で並列実行することで N+1 リクエストの影響を抑える
 - **キャッシュ:** `chrome.storage.local` に記事情報を保存、有効期限3時間。Tech / Idea を別キーで保持し、トグル切替時もキャッシュを優先
 - **Tech / Idea トグル:** ヘッダーにトグルを配置し、選択中カテゴリの記事一覧を表示する。初期表示は Tech

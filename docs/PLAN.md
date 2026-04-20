@@ -2,8 +2,11 @@ Zennのトレンド記事をブラウザのツールバーから確認できるC
 著者、記事タイトル、投稿日時、タグ、LGTM数を表示する。
 
 トレンド記事は以下のAPIを使って取得する。
-- Tech: `https://zenn.dev/api/articles?order=daily&article_type=tech`
-- Idea: `https://zenn.dev/api/articles?order=daily&article_type=idea`
+- Tech一覧: `https://zenn.dev/api/articles?order=daily&article_type=tech`
+- Idea一覧: `https://zenn.dev/api/articles?order=daily&article_type=idea`
+
+一覧APIのレスポンスには `topics`（タグ）が含まれないため、タグを表示するには記事ごとに詳細APIを呼び出す必要がある。
+- 記事詳細: `https://zenn.dev/api/articles/:slug`
 
 [qiita-trend-viewer](https://github.com/kamata-bug-factory/qiita-trend-viewer) に合わせて、表示対象はTech, Ideaそれぞれ10件とする。
 一度取得した記事情報はブラウザのストレージにキャッシュ保存し、有効期限を3時間とする。
