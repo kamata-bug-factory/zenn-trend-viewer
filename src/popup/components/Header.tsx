@@ -30,34 +30,31 @@ export function Header({
   refreshing,
 }: HeaderProps) {
   return (
-    <header className="flex flex-col gap-2 border-b border-border px-4 py-3">
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <img src="/icons/icon48.png" alt="" className="size-5" />
-          <div>
-            <h1 className="text-sm font-bold leading-none tracking-tight">
-              Zenn Trend
-            </h1>
-            {cachedAt !== null && (
-              <p className="mt-0.5 text-[10px] leading-none text-muted-foreground">
-                {formatUpdatedAt(cachedAt)}
-              </p>
-            )}
-          </div>
-        </div>
-        <Button
-          variant="ghost"
-          size="icon-xs"
-          onClick={onRefresh}
-          aria-label="Refresh"
-          disabled={refreshing}
-        >
-          <RefreshCw
-            className={refreshing ? "size-3.5 animate-spin" : "size-3.5"}
-          />
-        </Button>
+    <header className="flex items-center gap-3 border-b border-border px-4 py-3">
+      <img src="/icons/icon48.png" alt="" className="size-5 shrink-0" />
+      <div className="min-w-0">
+        <h1 className="text-sm font-bold leading-none tracking-tight">
+          Zenn Trend
+        </h1>
+        {cachedAt !== null && (
+          <p className="mt-0.5 text-[10px] leading-none text-muted-foreground">
+            {formatUpdatedAt(cachedAt)}
+          </p>
+        )}
       </div>
       <CategoryToggle value={category} onChange={onCategoryChange} />
+      <Button
+        variant="ghost"
+        size="icon-xs"
+        onClick={onRefresh}
+        aria-label="Refresh"
+        disabled={refreshing}
+        className="ml-auto"
+      >
+        <RefreshCw
+          className={refreshing ? "size-3.5 animate-spin" : "size-3.5"}
+        />
+      </Button>
     </header>
   );
 }
