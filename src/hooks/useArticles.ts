@@ -41,6 +41,11 @@ export function useArticles(): UseArticlesResult {
         return;
       }
 
+      // Clear the previous category's articles on a cache miss so the
+      // skeleton renders immediately while the network request is in flight.
+      setArticles([]);
+      setCachedAt(null);
+
       const details = await fetchFromNetwork(category);
       setArticles(details);
       setCachedAt(Date.now());
