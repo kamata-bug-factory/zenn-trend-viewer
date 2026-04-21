@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Zenn Trend Viewer",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Zennのトレンド記事をブラウザのツールバーから確認できるChrome拡張機能",
   "permissions": ["storage"],
   "host_permissions": ["https://zenn.dev/*"],
