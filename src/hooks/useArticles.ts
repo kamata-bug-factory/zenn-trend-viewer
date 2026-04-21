@@ -62,6 +62,9 @@ export function useArticles(): UseArticlesResult {
   const refetchArticles = useCallback(async (category: Category) => {
     setLoading(true);
     setError(null);
+    // Clear the current articles so the skeleton is shown while refreshing.
+    setArticles([]);
+    setCachedAt(null);
 
     try {
       await clearAllCachedArticles();
